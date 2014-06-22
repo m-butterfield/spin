@@ -1,0 +1,91 @@
+html {
+    height: 100%;
+}
+body {
+    background-color: #111111;
+    height: 100%;
+    margin: 0;
+    color: #707070;
+}
+.bg-div {
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+.outside-left {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(0, #0a0a0a),
+        color-stop(0.5, #111111)
+    );
+    background-image: -o-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+    background-image: -moz-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+    background-image: -webkit-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+    background-image: -ms-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+    background-image: linear-gradient(to right, #0a0a0a 0%, #111111 50%);
+}
+.outside-right {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(0, #0a0a0a),
+        color-stop(0.5, #111111)
+    );
+    background-image: -o-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+    background-image: -moz-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+    background-image: -webkit-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+    background-image: -ms-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+    background-image: linear-gradient(to left, #0a0a0a 0%, #111111 50%);
+}
+#spinnerCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#color-picker-container {
+    position: absolute;
+    height: 20px;
+    width: 150px;
+    top: 25px;
+    right: 50px;
+}
+.row {
+    height: 100%;
+}
+.color-swatch {
+    float:left;
+    width: 12.5%;
+    height: 100%;
+}
+#green {
+    background-color: green;
+}
+#blue {
+    background-color: blue;
+}
+#red {
+    background-color: red;
+}
+#yellow {
+    background-color: yellow;
+}
+#orange {
+    background-color: orange;
+}
+#black {
+    background-color: black;
+}
+#white {
+    background-color: white;
+}
+#purple {
+    background-color: purple;
+}
+#clear-button {
+    position: absolute;
+    top: 39px;
+    right: 47px;
+}

@@ -50,17 +50,11 @@ document.addEventListener("DOMContentLoaded", function() {
         context.closePath();
     }
 
-    window.erase = function erase() {
+    var button = document.getElementById('clear-button');
+    button.addEventListener("click", function() {
         context.clearRect(0, 0, w, h);
         document.getElementById("canvasimg").style.display = "none";
-    }
-
-    window.save = function save() {
-        document.getElementById("canvasimg").style.border = "2px solid";
-        var dataURL = canvas.toDataURL();
-        document.getElementById("canvasimg").src = dataURL;
-        document.getElementById("canvasimg").style.display = "inline";
-    }
+    });
 
     function findxy(res, e) {
         if (res == 'down') {
