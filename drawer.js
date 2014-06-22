@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         context.translate(w / 2, h / 2);
         context.rotate(angle * Math.PI / 180);
         context.translate(-w / 2, -h / 2);
+        context.globalAlpha = 0.98;
         context.drawImage(mem_canvas, 0, 0);
         context.restore();
     }
