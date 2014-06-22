@@ -92,11 +92,12 @@ body {
 #spin-settings {
     position: absolute;
     height: 20px;
-    width: 80px;
+    width: 110px;
     top: 130px;
     right: 50px;
+    text-align: center;
 }
-#angle-input {
-    width: 100%;
+.spin-setting-input {
+    width: 50%;
     text-align: right;
 }

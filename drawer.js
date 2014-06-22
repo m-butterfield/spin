@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
         currY = 0,
         dot_flag = false,
         x = "blue",
-        y = 2;
+        y = 2,
+        interval;
 
 
     canvas = document.getElementById('spinnerCanvas');
@@ -99,7 +100,32 @@ document.addEventListener("DOMContentLoaded", function() {
     var angleInput = document.getElementById('angle-input');
     angleInput.value = angle;
     angleInput.addEventListener('change', function(event) {
+        if (Number(event.target.value) < 0 ) {
+            event.target.value = 0;
+            return;
+        }
+        if (Number(event.target.value) > 360) {
+            event.target.value = 360;
+            return;
+        }
         angle = event.target.value;
+    });
+
+    var speed = 50;
+    var speedInput = document.getElementById('speed-input');
+    speedInput.value = speed;
+    speedInput.addEventListener('change', function(event) {
+        if (Number(event.target.value) < 0 ) {
+            event.target.value = 0;
+            return;
+        }
+        if (Number(event.target.value) > 5000) {
+            event.target.value = 5000;
+            return;
+        }
+        speed = event.target.value;
+        clearInterval(interval);
+        interval = setInterval(rotate, speed);
     });
 
     function rotate() {
@@ -113,6 +139,6 @@ document.addEventListener("DOMContentLoaded", function() {
         context.drawImage(mem_canvas, 0, 0);
         context.restore();
     }
-    setInterval(rotate, 50);
+    interval = setInterval(rotate, speed);
 
 });
