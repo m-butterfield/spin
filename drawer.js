@@ -23,16 +23,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
-    }, false);
+    });
     canvas.addEventListener("mousedown", function (e) {
         findxy('down', e)
-    }, false);
+    });
     canvas.addEventListener("mouseup", function (e) {
         findxy('up', e)
-    }, false);
+    });
     canvas.addEventListener("mouseout", function (e) {
         findxy('out', e)
-    }, false);
+    });
 
     var color = function(event) {
         x = event.target.id;
@@ -95,13 +95,20 @@ document.addEventListener("DOMContentLoaded", function() {
     mem_canvas.setAttribute('height', h.toString());
     var mem_context = mem_canvas.getContext('2d');
 
+    var angle = 45;
+    var angleInput = document.getElementById('angle-input');
+    angleInput.value = angle;
+    angleInput.addEventListener('change', function(event) {
+        angle = event.target.value;
+    });
+
     function rotate() {
         mem_context.clearRect(0, 0, w, h);
         mem_context.drawImage(canvas, 0, 0);
         context.clearRect(0, 0, w, h);
         context.save();
         context.translate(w / 2, h / 2);
-        context.rotate(45 * Math.PI / 180);
+        context.rotate(angle * Math.PI / 180);
         context.translate(-w / 2, -h / 2);
         context.drawImage(mem_canvas, 0, 0);
         context.restore();

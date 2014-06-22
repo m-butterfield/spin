@@ -89,3 +89,14 @@ body {
     top: 39px;
     right: 47px;
 }
+#spin-settings {
+    position: absolute;
+    height: 20px;
+    width: 80px;
+    top: 130px;
+    right: 50px;
+}
+#angle-input {
+    width: 100%;
+    text-align: right;
+}
