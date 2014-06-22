@@ -12,6 +12,7 @@
                 background-color: #111111;
                 height: 100%;
                 margin: 0;
+                color: #707070;
             }
             .bg-div {
                 float: left;
@@ -51,6 +52,50 @@
                 top: 0;
                 left: 0;
             }
+            #color-picker-container {
+                position: absolute;
+                height: 20px;
+                width: 150px;
+                top: 25px;
+                right: 50px;
+            }
+            .row {
+                height: 100%;
+            }
+            .color-swatch {
+                float:left;
+                width: 12.5%;
+                height: 100%;
+            }
+            #green {
+                background-color: green;
+            }
+            #blue {
+                background-color: blue;
+            }
+            #red {
+                background-color: red;
+            }
+            #yellow {
+                background-color: yellow;
+            }
+            #orange {
+                background-color: orange;
+            }
+            #black {
+                background-color: black;
+            }
+            #white {
+                background-color: white;
+            }
+            #purple {
+                background-color: purple;
+            }
+            #clear-button {
+                position: absolute;
+                top: 39px;
+                right: 47px;
+            }
         </style>
         <script type="text/javascript" src="drawer.js"></script>
     </head>
@@ -60,16 +105,19 @@
         <div class="bg-div"></div>
         <div class="bg-div outside-right"></div>
         <canvas id="spinnerCanvas"></canvas>
-            <div style="position:absolute;top:12%;left:43%;">Choose Color</div>
-        <div style="position:absolute;top:15%;left:45%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
-        <div style="position:absolute;top:15%;left:46%;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
-        <div style="position:absolute;top:15%;left:47%;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:45%;width:10px;height:10px;background:yellow;" id="yellow" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:46%;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:47%;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
-        <div style="position:absolute;top:20%;left:43%;">Eraser</div>
-        <div style="position:absolute;top:22%;left:45%;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
-        <!--<input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
-        <!--<input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:55%;left:15%;">-->
+        <div id="color-picker-container">
+            <p>Choose Color</p>
+            <div class="row">
+                <div class='color-swatch' id="green" onclick="color(this)"></div>
+                <div class='color-swatch' id="blue" onclick="color(this)"></div>
+                <div class='color-swatch' id="red" onclick="color(this)"></div>
+                <div class='color-swatch' id="yellow" onclick="color(this)"></div>
+                <div class='color-swatch' id="orange" onclick="color(this)"></div>
+                <div class='color-swatch' id="black" onclick="color(this)"></div>
+                <div class='color-swatch' id="purple" onclick="color(this)"></div>
+                <div class='color-swatch' id="white" onclick="color(this)"></div>
+            </div>
+        </div>
+        <input type="button" value="clear" id="clear-button" onclick="erase()">
     </body>
 </html>

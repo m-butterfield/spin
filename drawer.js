@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
         prevY = 0,
         currY = 0,
         dot_flag = false,
-        x = "black",
+        x = "blue",
         y = 2;
 
 
@@ -36,32 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     window.color = function color(obj) {
-        switch (obj.id) {
-            case "green":
-                x = "green";
-                break;
-            case "blue":
-                x = "blue";
-                break;
-            case "red":
-                x = "red";
-                break;
-            case "yellow":
-                x = "yellow";
-                break;
-            case "orange":
-                x = "orange";
-                break;
-            case "black":
-                x = "black";
-                break;
-            case "white":
-                x = "white";
-                break;
-        }
-        if (x == "white") y = 14;
-        else y = 25;
-
+        x = obj.id;
     }
 
     function draw() {
@@ -76,11 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     window.erase = function erase() {
-        var m = confirm("Want to clear");
-        if (m) {
-            context.clearRect(0, 0, w, h);
-            document.getElementById("canvasimg").style.display = "none";
-        }
+        context.clearRect(0, 0, w, h);
+        document.getElementById("canvasimg").style.display = "none";
     }
 
     window.save = function save() {
