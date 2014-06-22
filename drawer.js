@@ -34,9 +34,12 @@ document.addEventListener("DOMContentLoaded", function() {
         findxy('out', e)
     }, false);
 
-
-    window.color = function color(obj) {
-        x = obj.id;
+    var color = function(event) {
+        x = event.target.id;
+    };
+    var colors = document.getElementsByClassName('color-swatch');
+    for (var i = 0; i < colors.length; i++) {
+        colors[i].addEventListener('click', color);
     }
 
     function draw() {
