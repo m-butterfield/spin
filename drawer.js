@@ -1,20 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    var canvas, ctx, flag = false,
+    var canvas, context, flag = false,
         prevX = 0,
         currX = 0,
         prevY = 0,
         currY = 0,
-        dot_flag = false;
-
-    var x = "black",
+        dot_flag = false,
+        x = "black",
         y = 2;
 
 
-    canvas = document.getElementById('can');
-    ctx = canvas.getContext("2d");
-    w = canvas.width;
-    h = canvas.height;
+    canvas = document.getElementById('spinnerCanvas');
+    context = canvas.getContext("2d");
+
+    var pageWidth = document.body.offsetWidth,
+        pageHeight = document.body.scrollHeight;
+    canvas.setAttribute('width', pageWidth.toString());
+    canvas.setAttribute('height', pageHeight.toString());
+
+    var w = canvas.width;
+    var h = canvas.height;
 
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
@@ -55,24 +60,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 break;
         }
         if (x == "white") y = 14;
-        else y = 2;
+        else y = 25;
 
     }
 
     function draw() {
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-        ctx.strokeStyle = x;
-        ctx.lineWidth = y;
-        ctx.stroke();
-        ctx.closePath();
+        context.beginPath();
+        context.moveTo(prevX, prevY);
+        context.lineTo(currX, currY);
+        context.strokeStyle = x;
+        context.lineHeight = y;
+        context.lineWidth = 3;
+        context.stroke();
+        context.closePath();
     }
 
     window.erase = function erase() {
         var m = confirm("Want to clear");
         if (m) {
-            ctx.clearRect(0, 0, w, h);
+            context.clearRect(0, 0, w, h);
             document.getElementById("canvasimg").style.display = "none";
         }
     }
@@ -94,10 +100,10 @@ document.addEventListener("DOMContentLoaded", function() {
             flag = true;
             dot_flag = true;
             if (dot_flag) {
-                ctx.beginPath();
-                ctx.fillStyle = x;
-                ctx.fillRect(currX, currY, 2, 2);
-                ctx.closePath();
+                context.beginPath();
+                context.fillStyle = x;
+                context.fillRect(currX, currY, 2, 2);
+                context.closePath();
                 dot_flag = false;
             }
         }
@@ -123,15 +129,14 @@ document.addEventListener("DOMContentLoaded", function() {
     function rotate() {
         mem_context.clearRect(0, 0, w, h);
         mem_context.drawImage(canvas, 0, 0);
-        ctx.clearRect(0, 0, w, h);
-        ctx.save();
-        ctx.translate(w / 2, h / 2);
-        ctx.rotate(10 * Math.PI / 180);
-        ctx.translate(-w / 2, -h / 2);
-        ctx.drawImage(mem_canvas, 0, 0);
-        ctx.restore();
+        context.clearRect(0, 0, w, h);
+        context.save();
+        context.translate(w / 2, h / 2);
+        context.rotate(45 * Math.PI / 180);
+        context.translate(-w / 2, -h / 2);
+        context.drawImage(mem_canvas, 0, 0);
+        context.restore();
     }
-    setInterval(rotate, 100);
-
+    setInterval(rotate, 50);
 
 });
