@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
         context.moveTo(prevX, prevY);
         context.lineTo(currX, currY);
         context.strokeStyle = x;
-        context.lineHeight = y;
-        context.lineWidth = 3;
+        context.lineHeight = 0;
+        context.lineWidth = y;
         context.stroke();
         context.closePath();
     }
@@ -128,6 +128,12 @@ document.addEventListener("DOMContentLoaded", function() {
         interval = setInterval(rotate, speed);
     });
 
+    var thicknessInput = document.getElementById('thickness');
+    thicknessInput.value = y;
+    thicknessInput.addEventListener('change', function(event) {
+        y = event.target.value;
+    });
+
     function rotate() {
         mem_context.clearRect(0, 0, w, h);
         mem_context.drawImage(canvas, 0, 0);
@@ -136,7 +142,8 @@ document.addEventListener("DOMContentLoaded", function() {
         context.translate(w / 2, h / 2);
         context.rotate(angle * Math.PI / 180);
         context.translate(-w / 2, -h / 2);
-        context.globalAlpha = 0.98;
+        // this will gradually fade out the lines that are drawn
+//        context.globalAlpha = 0.98;
         context.drawImage(mem_canvas, 0, 0);
         context.restore();
     }
