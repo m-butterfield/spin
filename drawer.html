@@ -5,15 +5,62 @@
             Drawer
         </title>
         <style type="text/css">
+            html {
+                height: 100%;
+            }
             body {
-                background-color: black;
+                background-color: #111111;
+                height: 100%;
+                margin: 0;
+            }
+            .bg-div {
+                float: left;
+                width: 25%;
+                height: 100%;
+            }
+            .outside-left {
+                background-image: -webkit-gradient(
+                    linear,
+                    left top,
+                    right top,
+                    color-stop(0, #0a0a0a),
+                    color-stop(0.5, #111111)
+                );
+                background-image: -o-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+                background-image: -moz-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+                background-image: -webkit-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+                background-image: -ms-linear-gradient(right, #0a0a0a 0%, #111111 50%);
+                background-image: linear-gradient(to right, #0a0a0a 0%, #111111 50%);
+            }
+            .outside-right {
+                background-image: -webkit-gradient(
+                    linear,
+                    left top,
+                    right top,
+                    color-stop(0, #0a0a0a),
+                    color-stop(0.5, #111111)
+                );
+                background-image: -o-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+                background-image: -moz-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+                background-image: -webkit-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+                background-image: -ms-linear-gradient(left, #0a0a0a 0%, #111111 50%);
+                background-image: linear-gradient(to left, #0a0a0a 0%, #111111 50%);
+            }
+            #spinnerCanvas {
+                position: absolute;
+                top: 0;
+                left: 0;
             }
         </style>
         <script type="text/javascript" src="drawer.js"></script>
     </head>
     <body>
+        <div class="bg-div outside-left"></div>
+        <div class="bg-div"></div>
+        <div class="bg-div"></div>
+        <div class="bg-div outside-right"></div>
         <canvas id="spinnerCanvas"></canvas>
-        <div style="position:absolute;top:12%;left:43%;">Choose Color</div>
+            <div style="position:absolute;top:12%;left:43%;">Choose Color</div>
         <div style="position:absolute;top:15%;left:45%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
         <div style="position:absolute;top:15%;left:46%;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
         <div style="position:absolute;top:15%;left:47%;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
