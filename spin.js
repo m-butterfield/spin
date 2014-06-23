@@ -119,9 +119,9 @@ document.addEventListener("DOMContentLoaded", function() {
         interval = setInterval(rotate, speed);
     });
 
-    var thicknessInput = document.getElementById('thickness');
-    thicknessInput.value = lineWidth;
-    thicknessInput.addEventListener('change', function(event) {
+    var lineWidthInput = document.getElementById('line-width');
+    lineWidthInput.value = lineWidth;
+    lineWidthInput.addEventListener('change', function(event) {
         lineWidth = event.target.value;
     });
 
