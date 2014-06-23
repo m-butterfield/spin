@@ -30,12 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
         lineColor = "blue",
         lineWidth = 5;
 
-    var findxy = function(res, e) {
+    var findxy = function(res, x, y) {
+        event.preventDefault();
         if (res == 'down') {
             prevX = currX;
             prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
+            currX = x - canvas.offsetLeft;
+            currY = y - canvas.offsetTop;
 
             flag = true;
             dotFlag = true;
@@ -54,30 +55,30 @@ document.addEventListener("DOMContentLoaded", function() {
             if (flag) {
                 prevX = currX;
                 prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
+                currX = x - canvas.offsetLeft;
+                currY = y - canvas.offsetTop;
                 draw();
             }
         }
     };
 
-    canvas.addEventListener("mousemove", function (e) {
-        findxy('move', e);
+    canvas.addEventListener("mousemove", function (event) {
+        findxy('move', event.clientX, event.clientY);
     });
-    canvas.addEventListener("mousedown", function (e) {
-        findxy('down', e);
+    canvas.addEventListener("mousedown", function (event) {
+        findxy('down', event.clientX, event.clientY);
     });
-    canvas.addEventListener("mouseup", function (e) {
-        findxy('up', e);
+    canvas.addEventListener("mouseup", function (event) {
+        findxy('up', event.clientX, event.clientY);
     });
-    canvas.addEventListener("touchmove", function (e) {
-        findxy('move', e);
+    canvas.addEventListener("touchmove", function (event) {
+        findxy('move', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
-    canvas.addEventListener("touchstart", function (e) {
-        findxy('down', e);
+    canvas.addEventListener("touchstart", function (event) {
+        findxy('down', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
-    canvas.addEventListener("touchend", function (e) {
-        findxy('up', e);
+    canvas.addEventListener("touchend", function (event) {
+        findxy('up', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
 
     var color = function(event) {
