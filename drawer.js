@@ -1,66 +1,36 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    var canvas, context, flag = false,
+    var canvas = document.getElementById('spinnerCanvas'),
+        context = canvas.getContext("2d"),
+        pageWidth = document.body.offsetWidth,
+        pageHeight = document.body.scrollHeight;
+
+    canvas.setAttribute('width', pageWidth.toString());
+    canvas.setAttribute('height', pageHeight.toString());
+
+    var canvasWidth = canvas.width,
+        canvasHeight = canvas.height;
+
+    var draw = function() {
+        context.beginPath();
+        context.moveTo(prevX, prevY);
+        context.lineTo(currX, currY);
+        context.strokeStyle = lineColor;
+        context.lineWidth = lineWidth;
+        context.stroke();
+        context.closePath();
+    };
+
+    var flag = false,
         prevX = 0,
         currX = 0,
         prevY = 0,
         currY = 0,
-        dot_flag = false,
-        x = "blue",
-        y = 2,
-        interval;
+        dotFlag = false,
+        lineColor = "blue",
+        lineWidth = 5;
 
-
-    canvas = document.getElementById('spinnerCanvas');
-    context = canvas.getContext("2d");
-
-    var pageWidth = document.body.offsetWidth,
-        pageHeight = document.body.scrollHeight;
-    canvas.setAttribute('width', pageWidth.toString());
-    canvas.setAttribute('height', pageHeight.toString());
-
-    var w = canvas.width;
-    var h = canvas.height;
-
-    canvas.addEventListener("mousemove", function (e) {
-        findxy('move', e)
-    });
-    canvas.addEventListener("mousedown", function (e) {
-        findxy('down', e)
-    });
-    canvas.addEventListener("mouseup", function (e) {
-        findxy('up', e)
-    });
-    canvas.addEventListener("mouseout", function (e) {
-        findxy('out', e)
-    });
-
-    var color = function(event) {
-        x = event.target.id;
-    };
-    var colors = document.getElementsByClassName('color-swatch');
-    for (var i = 0; i < colors.length; i++) {
-        colors[i].addEventListener('click', color);
-    }
-
-    function draw() {
-        context.beginPath();
-        context.moveTo(prevX, prevY);
-        context.lineTo(currX, currY);
-        context.strokeStyle = x;
-        context.lineHeight = 0;
-        context.lineWidth = y;
-        context.stroke();
-        context.closePath();
-    }
-
-    var button = document.getElementById('clear-button');
-    button.addEventListener("click", function() {
-        context.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-    });
-
-    function findxy(res, e) {
+    var findxy = function(res, e) {
         if (res == 'down') {
             prevX = currX;
             prevY = currY;
@@ -68,13 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
             currY = e.clientY - canvas.offsetTop;
 
             flag = true;
-            dot_flag = true;
-            if (dot_flag) {
+            dotFlag = true;
+            if (dotFlag) {
                 context.beginPath();
-                context.fillStyle = x;
+                context.fillStyle = lineColor;
                 context.fillRect(currX, currY, 2, 2);
                 context.closePath();
-                dot_flag = false;
+                dotFlag = false;
             }
         }
         if (res == 'up' || res == "out") {
@@ -89,12 +59,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 draw();
             }
         }
+    };
+
+    canvas.addEventListener("mousemove", function (e) {
+        findxy('move', e);
+    });
+    canvas.addEventListener("mousedown", function (e) {
+        findxy('down', e);
+    });
+    canvas.addEventListener("mouseup", function (e) {
+        findxy('up', e);
+    });
+    canvas.addEventListener("mouseout", function (e) {
+        findxy('out', e);
+    });
+
+    var color = function(event) {
+        lineColor = event.target.id;
+    };
+    var colors = document.getElementsByClassName('color-swatch');
+    for (var i = 0; i < colors.length; i++) {
+        colors[i].addEventListener('click', color);
     }
 
-    var mem_canvas = document.createElement('canvas');
-    mem_canvas.setAttribute('width', w.toString());
-    mem_canvas.setAttribute('height', h.toString());
-    var mem_context = mem_canvas.getContext('2d');
+    var clearButton = document.getElementById('clear-button');
+    clearButton.addEventListener("click", function() {
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+    });
 
     var angle = 45;
     var angleInput = document.getElementById('angle-input');
@@ -129,24 +120,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     var thicknessInput = document.getElementById('thickness');
-    thicknessInput.value = y;
+    thicknessInput.value = lineWidth;
     thicknessInput.addEventListener('change', function(event) {
-        y = event.target.value;
+        lineWidth = event.target.value;
     });
 
-    function rotate() {
-        mem_context.clearRect(0, 0, w, h);
+    var mem_canvas = document.createElement('canvas');
+    mem_canvas.setAttribute('width', canvasWidth.toString());
+    mem_canvas.setAttribute('height', canvasHeight.toString());
+    var mem_context = mem_canvas.getContext('2d');
+
+    var rotate = function() {
+        mem_context.clearRect(0, 0, canvasWidth, canvasHeight);
         mem_context.drawImage(canvas, 0, 0);
-        context.clearRect(0, 0, w, h);
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
         context.save();
-        context.translate(w / 2, h / 2);
+        context.translate(canvasWidth / 2, canvasHeight / 2);
         context.rotate(angle * Math.PI / 180);
-        context.translate(-w / 2, -h / 2);
+        context.translate(-canvasWidth / 2, -canvasHeight / 2);
         // this will gradually fade out the lines that are drawn
-//        context.globalAlpha = 0.98;
+        // if we ever want to do that
+        // context.globalAlpha = 0.98;
         context.drawImage(mem_canvas, 0, 0);
         context.restore();
-    }
-    interval = setInterval(rotate, speed);
+    };
+    var interval = setInterval(rotate, speed);
 
 });

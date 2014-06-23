@@ -14,6 +14,7 @@
         <div class="bg-div outside-right"></div>
         <canvas id="spinnerCanvas"></canvas>
         <div id="color-picker-container">
+            <a id="sourceLink" href="https://github.com/m-butterfield/spin">Source code</a>
             <p>Choose Color:</p>
             <div class="row">
                 <div class='color-swatch' id="green"></div>
@@ -26,19 +27,21 @@
                 <div class='color-swatch' id="white"></div>
             </div>
         </div>
-        <input type="button" value="clear" id="clear-button">
         <div id="spin-settings">
             <div>
                 <label for="angle-input">Spin angle:</label>
-                <input class='spin-setting-input' type="number" id="angle-input">
             </div>
+            <input class='spin-setting-input' type="number" id="angle-input">
             <div>
                 <label for="speed-input">Rotation Speed:</label>
-                <input class='spin-setting-input' type="number" id="speed-input">
             </div>
+            <input class='spin-setting-input' type="number" id="speed-input">
             <div>
                 <label for="thickness">Line Thickness</label>
-                <input class='spin-setting-input' id="thickness" type="number">
+            </div>
+            <input class='spin-setting-input' id="thickness" type="number">
+            <div>
+                <input type="button" value="Clear Image" id="clear-button">
             </div>
         </div>
     </body>
