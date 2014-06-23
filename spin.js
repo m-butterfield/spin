@@ -70,8 +70,14 @@ document.addEventListener("DOMContentLoaded", function() {
     canvas.addEventListener("mouseup", function (e) {
         findxy('up', e);
     });
-    canvas.addEventListener("mouseout", function (e) {
-        findxy('out', e);
+    canvas.addEventListener("touchmove", function (e) {
+        findxy('move', e);
+    });
+    canvas.addEventListener("touchstart", function (e) {
+        findxy('down', e);
+    });
+    canvas.addEventListener("touchend", function (e) {
+        findxy('up', e);
     });
 
     var color = function(event) {
