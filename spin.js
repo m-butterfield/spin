@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
         lineWidth = 5;
 
     var findxy = function(res, x, y) {
-        event.preventDefault();
         if (res == 'down') {
             prevX = currX;
             prevY = currY;
@@ -72,12 +71,15 @@ document.addEventListener("DOMContentLoaded", function() {
         findxy('up', event.clientX, event.clientY);
     });
     canvas.addEventListener("touchmove", function (event) {
+        event.preventDefault();
         findxy('move', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
     canvas.addEventListener("touchstart", function (event) {
+        event.preventDefault();
         findxy('down', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
     canvas.addEventListener("touchend", function (event) {
+        event.preventDefault();
         findxy('up', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
     });
 
