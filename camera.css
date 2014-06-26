@@ -45,79 +45,9 @@ body {
     background-image: linear-gradient(to left, #0a0a0a 0%, #111111 50%);
 }
 
-#spinnerCanvas {
+#cameraCanvas {
     position: absolute;
     top: 0;
     left: 0;
     cursor: crosshair;
-}
-
-#color-picker-container {
-    text-align: center;
-    position: absolute;
-    height: 20px;
-    width: 150px;
-    top: 25px;
-    right: 50px;
-}
-
-.row {
-    height: 100%;
-}
-
-.color-swatch {
-    float:left;
-    width: 12.5%;
-    height: 100%;
-}
-
-#green {
-    background-color: green;
-}
-#blue {
-    background-color: blue;
-}
-#red {
-    background-color: red;
-}
-#yellow {
-    background-color: yellow;
-}
-#orange {
-    background-color: orange;
-}
-#black {
-    background-color: black;
-}
-#white {
-    background-color: white;
-}
-#purple {
-    background-color: purple;
-}
-
-#spin-settings {
-    position: absolute;
-    height: 20px;
-    width: 150px;
-    top: 145px;
-    right: 50px;
-    text-align: center;
-}
-
-#clear-button {
-    margin-top: 15px;
-}
-
-.spin-setting-input {
-    width: 25%;
-    text-align: right;
-}
-
-#sourceLink {
-    display: block;
-    margin-top: 8px;
-    text-decoration: underline;
-    font-weight: bold;
-    color: #C2C2C2;
 }
