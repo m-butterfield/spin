@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", function() {
     canvas.addEventListener("mouseup", function (event) {
         findxy('up', event.clientX, event.clientY);
     });
+    canvas.addEventListener("mouseout", function (event) {
+        findxy('out', event);
+    });
     canvas.addEventListener("touchmove", function (event) {
         event.preventDefault();
         findxy('move', event.changedTouches[0].pageX, event.changedTouches[0].pageY);
