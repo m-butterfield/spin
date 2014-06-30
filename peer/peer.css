@@ -1,0 +1,18 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #111111;
+    height: 100%;
+    margin: 0;
+    color: #C2C2C2;
+}
+
+#videoDiv {
+    text-align: center;
+}
+
+#video {
+    display: none;
+}
