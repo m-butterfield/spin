@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         width = document.body.offsetWidth,
         height = document.body.scrollHeight,
         streaming = false,
+        angle = 0,
         video = document.getElementById('video');
 
     canvas.width = width;
@@ -31,6 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var draw = function(vid, can, w, h) {
         can.drawImage(vid, 0, 0, w, h);
+        if (angle >= 360) {
+            angle = 0;
+        }
+        angle++;
+        rotate(angle);
         setTimeout(draw, 20, vid, can, w, h);
     };
 
@@ -47,5 +53,22 @@ document.addEventListener("DOMContentLoaded", function() {
             streaming = true;
         }
     }, false);
+
+    var mem_canvas = document.createElement('canvas'),
+        mem_context = mem_canvas.getContext('2d');
+    mem_canvas.setAttribute('width', width);
+    mem_canvas.setAttribute('height', height);
+
+    var rotate = function(angle) {
+        mem_context.clearRect(0, 0, width, height);
+        mem_context.drawImage(canvas, 0, 0);
+        context.clearRect(0, 0, width, height);
+        context.save();
+        context.translate(width / 2, height / 2);
+        context.rotate(angle * Math.PI / 180);
+        context.translate(-width / 2, -height / 2);
+        context.drawImage(mem_canvas, 0, 0);
+        context.restore();
+    };
 
 });
