@@ -1,25 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    var canvas = document.getElementById('cameraCanvas'),
-        pageWidth = 300,
-        pageHeight = 300;
 
-    canvas.setAttribute('width', pageWidth.toString());
-    canvas.setAttribute('height', pageHeight.toString());
+    var canvas = document.getElementById('videoCanvas'),
+        context = canvas.getContext('2d'),
+        width = document.body.offsetWidth,
+        height = document.body.scrollHeight;
+
+    canvas.width = width;
+    canvas.height = height;
 
     var streaming = false,
-        video = document.getElementById('video'),
-        photo = document.getElementById('photo'),
-        startButton = document.getElementById('startButton');
+        video = document.getElementById('video');
 
     navigator.getMedia = (navigator.getUserMedia ||
                           navigator.webkitGetUserMedia ||
                           navigator.mozGetUserMedia ||
                           navigator.msGetUserMedia);
+
     navigator.getMedia({
         video: true,
         audio: false
-    }, function(stream) {
+    }, function (stream) {
         if (navigator.mozGetUserMedia) {
             video.mozSrcObject = stream;
         } else {
@@ -27,28 +28,33 @@ document.addEventListener("DOMContentLoaded", function() {
             video.src = vendorURL.createObjectURL(stream);
         }
         video.play();
-    }, function(err) {
-        console.log("An error occured! " + err);
+    }, function (error) {
+        console.log("An error occured! " + error);
     });
 
-    video.addEventListener('canplay', function(event) {
+    video.addEventListener('canplay', function (event) {
         if (!streaming) {
-            video.setAttribute('width', pageWidth.toString());
-            video.setAttribute('height', pageHeight.toString());
+            calcWidth = video.videoWidth / (video.videoHeight / height);
+            video.setAttribute('width', calcWidth);
+            video.setAttribute('height', height);
             streaming = true;
+            draw(this, context, width, height);
         }
-    });
+    }, false);
 
-    function takepicture() {
-        canvas.getContext('2d').drawImage(video, 0, 0, pageWidth, pageHeight);
-        var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);
+    function draw(vid, can, w, h) {
+        can.drawImage(vid, 0, 0, w, h);
+        setTimeout(draw, 20, vid, can, w, h);
     }
 
-    startButton.addEventListener('click', function(event){
-        takepicture();
-        event.preventDefault();
-    });
-
+    video.addEventListener('canplay', function (event) {
+        if (!streaming) {
+            width = video.videoWidth / (video.videoHeight / height);
+            video.setAttribute('width', width);
+            video.setAttribute('height', height);
+            streaming = true;
+            draw(this, context, width, height);
+        }
+    }, false);
 
 });
