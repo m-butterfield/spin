@@ -1,8 +1,10 @@
 // Compatibility shim
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+navigator.getUserMedia = navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia;
 
-// PeerJS object
-var peer = new Peer({key: 'ovs2016n4qcfecdi'});
+var id = Math.floor(Math.random() * 100).toString();
+var peer = new Peer(id, {host: '184.173.126.130', port: 22214, path: '/myapp'});
 
 peer.on('open', function() {
     $('#my-id').text(peer.id);
@@ -21,38 +23,17 @@ peer.on('error', function(err) {
     step2();
 });
 
-// Click handlers setup
-$(function() {
-    $('#make-call').click(function(){
-        // Initiate a call!
-        var call = peer.call($('#callto-id').val(), window.localStream);
-
-        step3(call);
-    });
-
-    $('#end-call').click(function(){
-        window.existingCall.close();
-        step2();
-    });
-
-    // Retry if getUserMedia fails
-    $('#step1-retry').click(function(){
-        $('#step1-error').hide();
-        step1();
-    });
-
-    // Get things started
-    step1();
-});
-
 var step1 = function() {
     // Get audio/video stream
-    navigator.getUserMedia({audio: true, video: true}, function(stream){
-    // Set your video displays
-    $('#my-video').prop('src', URL.createObjectURL(stream));
+    navigator.getUserMedia({
+        audio: true,
+        video: true
+    }, function(stream) {
+        // Set your video displays
+        $('#my-video').prop('src', URL.createObjectURL(stream));
 
-    window.localStream = stream;
-    step2();
+        window.localStream = stream;
+        step2();
     }, function() {
         $('#step1-error').show();
     });
@@ -70,7 +51,7 @@ var step3 = function(call) {
     }
 
     // Wait for stream on the call, then set peer video display
-    call.on('stream', function(stream){
+    call.on('stream', function(stream) {
         $('#their-video').prop('src', URL.createObjectURL(stream));
     });
 
@@ -81,3 +62,27 @@ var step3 = function(call) {
     $('#step1, #step2').hide();
     $('#step3').show();
 };
+
+// Click handlers setup
+$(function() {
+    $('#make-call').click(function() {
+        // Initiate a call!
+        var call = peer.call($('#callto-id').val(), window.localStream);
+
+        step3(call);
+    });
+
+    $('#end-call').click(function() {
+        window.existingCall.close();
+        step2();
+    });
+
+    // Retry if getUserMedia fails
+    $('#step1-retry').click(function() {
+        $('#step1-error').hide();
+        step1();
+    });
+
+    // Get things started
+    step1();
+});
